@@ -1,9 +1,9 @@
 # Galaxy Store
 
-## How to Run
+How to Run
 
 1. Clone the repository.
-2. uNode version `v18`.
+2. Node version `v18`.
 3. Install the dependencies by running `npm install`.
 4. Build a aplication `npm run build`.
 5. Run `npm run start`.
