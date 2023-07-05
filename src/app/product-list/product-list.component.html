@@ -1,0 +1,12 @@
+<div class="product-list row">
+  <div class="card product-card rounded-bottom" *ngFor="let product of (products$ | async)" (click)="selectProduct(product.id)" style="width: 18rem; cursor: pointer;">
+    <div *ngIf="!product.isAvailable" class="card-header text-white bg-dark">Indisponível</div>
+    <div class="image-preview">
+      <img src={{product.image}} class="card-img-top" height="300px" alt="...">
+    </div>
+    <div class="card-body bg-dark text-light rounded-bottom">
+      <p class="card-subtitle mb-1">{{product.name | uppercase}}</p>
+      <h5 class="card-title mb-0">{{product.price | currency: 'R$'}}</h5>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.image-preview {
+  border-right: 1px solid #eaeaea;
+}
+
+.product-card {
+  margin: 32px;
+}
+
+.container-product {
+  min-height: 400px;
+}

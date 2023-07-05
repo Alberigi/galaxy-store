@@ -1,0 +1,14 @@
+.product-list {
+  display: flex;
+  margin: 32px;
+}
+
+.product-card {
+  margin: 8px;
+  padding: 0px;
+}
+
+.image-preview {
+  width: 100%;
+  border-bottom: 1px solid #eaeaea;
+}

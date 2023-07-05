@@ -1,0 +1,36 @@
+<div class="card product-card p-4 col-md-10 justify-content-center">
+  <div class="row d-flex justify-content-between g-0 container-product">
+    <div class="image-preview col-md-3">
+      <img src="{{product?.image}}" width="300px" height="300px" class="img-fluid rounded-start" alt="..."/>
+    </div>
+      <div class="col-md-5">
+        <div class="card-body p-0">
+          <h2>Equipamento</h2>
+          <div class="mt-5">
+            <h4 class="card-title pb-2">{{product?.name}}</h4>
+            <h3 class="card-subtitle pb-2">R$ {{product?.price}}</h3>
+          </div>
+          <div class="mt-5">
+            <h5>Descrição:</h5>
+            <p class="card-text">{{product?.description}}</p>
+                <div class="input-group mb-2" style="width: 80%;">
+                  <input type="text" class="form-control" [(ngModel)]="quantity" required aria-label="unidades">
+                  <span class="input-group-text text-light bg-dark">Qtd</span>
+                </div>
+          </div>
+        </div>
+      </div>
+    <div class="col-md-3">
+      <div class="card-body p-0">
+        <div *ngIf="product?.isAvailable">
+          <button  type="button" (click)="buyNow()" class="btn btn-dark mb-2" style="width: 80%;">Comprar agora</button>
+          <button *ngIf="product?.isAvailable" (click)="addInCart()" type="button" class="btn btn-outline-primary mb-2" style="width: 80%;">Adicionar ao carrinho</button>
+        </div>
+
+        <div *ngIf="!product?.isAvailable">
+          <button type="button" disabled class="btn btn-dark">Produto Indisponível</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

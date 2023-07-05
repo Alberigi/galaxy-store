@@ -1,0 +1,8 @@
+.cart-container {
+  margin: 32px;
+}
+
+.delete-item {
+  text-align: end;
+  position: absolute;
+}
