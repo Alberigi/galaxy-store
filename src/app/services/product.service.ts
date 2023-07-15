@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { IOrderDTO } from '../interfaces/dtos';
 import { ICartItem, IProduct } from '../interfaces/models';
 import { IHttpClientService, IProductService } from '../interfaces/services';
 
@@ -14,14 +15,18 @@ export class ProductService implements IProductService {
   ) {}
 
   async get(): Promise<IProduct[]> {
+    return this.httpClientService.get<IProduct[]>('/api/equipments');
+  }
+
+  async getOrdered(order: string): Promise<IProduct[]> {
     return this.httpClientService.get<IProduct[]>(
-      'https://mandalorian-store.netlify.app/api/equipments'
+      `/api/equipments?orderBy=${order}`
     );
   }
 
   async search(search: string): Promise<IProduct[]> {
     return this.httpClientService.get<IProduct[]>(
-      `https://mandalorian-store.netlify.app/api/equipments?search=${search}`
+      `/api/equipments?search=${search}`
     );
   }
 
@@ -29,7 +34,7 @@ export class ProductService implements IProductService {
     cartItems: ICartItem[],
     name: string,
     deliveryAddress: string
-  ): Promise<void> {
+  ): Promise<IOrderDTO> {
     if (!name || !deliveryAddress) {
       this.toastr.error(this.messageIncompleteData);
       throw new Error(this.messageIncompleteData);
@@ -51,9 +56,11 @@ export class ProductService implements IProductService {
       items,
     };
 
-    await this.httpClientService.post(
-      'https://mandalorian-store.netlify.app/api/orders',
+    const result = await this.httpClientService.post<IOrderDTO>(
+      '/api/orders',
       orders
     );
+
+    return result;
   }
 }

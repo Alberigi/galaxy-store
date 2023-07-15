@@ -14,6 +14,7 @@ import { getProducts } from '../store/products/products.actions';
 export class ProductListComponent {
   products$: Observable<IProduct[]>;
   products: IProduct[] = [];
+  order = 'Selecione uma opção';
 
   constructor(
     private productService: IProductService,
@@ -37,5 +38,10 @@ export class ProductListComponent {
 
   selectProduct(id: string): void {
     this.router.navigate(['/product', id]);
+  }
+
+  async orderBy(): Promise<void> {
+    const result = await this.productService.getOrdered(this.order);
+    this.store.dispatch(getProducts({ payload: result }));
   }
 }

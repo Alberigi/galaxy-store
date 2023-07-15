@@ -28,7 +28,7 @@ export class ProductComponent {
   async ngOnInit() {
     const itemId = this.route.snapshot.paramMap.get('id');
     this.product = await this.httpClientService.get(
-      `https://mandalorian-store.netlify.app/api/equipments/${itemId}`
+      `/api/equipments/${itemId}`
     );
   }
 

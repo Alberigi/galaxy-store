@@ -1,12 +1,47 @@
-<div class="product-list row">
-  <div class="card product-card rounded-bottom" *ngFor="let product of (products$ | async)" (click)="selectProduct(product.id)" style="width: 18rem; cursor: pointer;">
-    <div *ngIf="!product.isAvailable" class="card-header text-white bg-dark">Indisponível</div>
-    <div class="image-preview">
-      <img src={{product.image}} class="card-img-top" height="300px" alt="...">
+<div class="product-list row justify-content-between">
+  <div class="col-md-2">
+    <div class="row">
+      <span class="ps-0">Ordenar por:</span>
+
+      <div class="input-group input-group mb-4 col-md-8 p-0">
+        <select [(ngModel)]="order" (change)="orderBy()" class="form-select form-select">
+          <option selected>Selecione uma opção</option>
+          <option value="name">Nome</option>
+          <option value="price">Preço</option>
+        </select>
+      </div>
     </div>
-    <div class="card-body bg-dark text-light rounded-bottom">
-      <p class="card-subtitle mb-1">{{product.name | uppercase}}</p>
-      <h5 class="card-title mb-0">{{product.price | currency: 'R$'}}</h5>
+
+    <div class="row ">
+      <span class="ps-0">Preço:</span>
+
+      <div class="input-group input-group-sm mb-4 col-md-8">
+        <div class="row justify-content-between">
+          <div class="col-md-5 p-0">
+            <input type="text" class="form-control rounded" placeholder="Máximo">
+          </div>
+
+          <div class="col-md-5 p-0">
+            <input type="text" class="form-control rounded" placeholder="Mínimo">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="col-md-10">
+    <div class="row  justify-content-end">
+      <div class="card product-card rounded-bottom" *ngFor="let product of (products$ | async)" (click)="selectProduct(product.id)" style="width: 18rem; cursor: pointer;">
+        <div *ngIf="!product.isAvailable" class="card-header text-white bg-dark">Indisponível</div>
+        <div class="image-preview">
+          <img src={{product.image}} class="card-img-top" height="300px" alt="...">
+        </div>
+        <div class="card-body bg-dark text-light rounded-bottom">
+          <p class="card-subtitle mb-1">{{product.name | uppercase}}</p>
+          <h5 class="card-title mb-0">{{product.price | currency: 'R$'}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

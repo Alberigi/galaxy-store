@@ -20,6 +20,8 @@ export class CartComponent {
   deliveryAddress = '';
   messageSuccessRemoveAll = 'Todos os produtos foram removidos com sucesso.';
   messageSuccessRemove = 'Produto removido com sucesso.';
+  messageSuccessBuy = 'Compra realizada com sucesso.';
+  messageErrorBuy = 'Erro ao tentar realizar a compra.';
 
   constructor(
     private productService: IProductService,
@@ -37,12 +39,19 @@ export class CartComponent {
   }
 
   async buy(): Promise<void> {
-    await this.productService.sendOrder(
+    const order = await this.productService.sendOrder(
       this.cartItems,
       this.name,
       this.deliveryAddress
     );
-    this.router.navigate(['/']);
+
+    if (order?.id) {
+      this.store.dispatch(clearCart());
+      this.toastr.success(this.messageSuccessBuy);
+      this.router.navigate(['/']);
+    } else {
+      this.toastr.error(this.messageErrorBuy);
+    }
   }
 
   async removeProduct(id: string): Promise<void> {
